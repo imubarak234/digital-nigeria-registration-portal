@@ -10,11 +10,6 @@
   --dark_green: #081c15;
 }
 
-body,
-html {
-  height: 100%;
-}
-
 body {
   font-family: 'Roboto Slab', serif;
   background-image: url(./images/Digital_Nigeria_Banner.jpg);
@@ -47,8 +42,20 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: var(--light_green);
+  color: var(--dark_green);
   z-index: 100;
+  font-weight: 800;
+}
+
+#main-section {
+  margin-top: 90px;
+  margin-bottom: 70px;
+}
+
+#main-section h2 {
+  font-size: 2.2em;
+  font-weight: 900;
+  margin-bottom: 50px;
 }
 
 #main-section .row .col-md-4 {
@@ -57,9 +64,17 @@ body {
 
 #main-section .row .col-md-4 .categories {
   position: absolute;
-  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   background-color: var(--dark_green);
-  width: 50%;
-  height: 50%;
   z-index: -1;
+}
+
+footer {
+  background-color: var(--light_green);
+}
+
+footer p {
+  font-size: 1.2em;
 }
