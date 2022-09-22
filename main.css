@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --light_green: #d8f3dc;
+  --mid_green: #2d6a4f;
+  --dark_green: #081c15;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto Slab', serif;
+  background-image: url(./images/Digital_Nigeria_Banner.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#naver {
+  background-color: transparent;
+  color: var(--mid_green);
+}
+
+#naver .inner-nav .mains-links li a {
+  font-size: 1.25em;
+  color: var(--mid_green);
+  border-bottom: 2px solid var(--mid_green);
+}
+
+#naver .inner-nav .mains-links li a:hover {
+  color: var(--light_green);
+}
+
+#naver .inner-nav .socials-links li a svg:hover {
+  fill: var(--light_green);
+}
+
+#main-section .row a {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--light_green);
+  z-index: 100;
+}
+
+#main-section .row .col-md-4 {
+  position: relative;
+}
+
+#main-section .row .col-md-4 .categories {
+  position: absolute;
+  bottom: 0;
+  background-color: var(--dark_green);
+  width: 50%;
+  height: 50%;
+  z-index: -1;
+}
