@@ -48,7 +48,7 @@ body {
 }
 
 #main-section {
-  margin-top: 90px;
+  margin-top: 70px;
   margin-bottom: 70px;
 }
 
@@ -77,4 +77,19 @@ footer {
 
 footer p {
   font-size: 1.2em;
+}
+
+#part-section form {
+  width: 270px;
+}
+
+@media screen and (max-width: 780px) {
+
+  #naver .inner-nav .socials-links {
+    display: none;
+  }
+
+  #naver .inner-nav .mains-links .contact-link {
+    display: none;
+  }
 }
