@@ -83,6 +83,27 @@ footer p {
   width: 270px;
 }
 
+#part-section form input {
+  border: 2px solid var(--mid_green);
+}
+
+#part-section form button {
+  font-size: 1.3em;
+  background-color: var(--mid_green);
+  border: none;
+  border-radius: 20px;
+  padding: 0.5em 1.5em;
+}
+
+#part-section form button:hover {
+  background-color: var(--light_green);
+  color: var(--dark_green);
+}
+
+#part-section {
+  margin: 100px 0;
+}
+
 @media screen and (max-width: 780px) {
 
   #naver .inner-nav .socials-links {
