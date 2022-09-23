@@ -172,9 +172,9 @@
         <label for="emailing" class="form-label">Email</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input type="text" class="form-control" id="emailing" aria-describedby="inputGroupPrepend" required>
+          <input type="email" class="form-control" id="emailing" aria-describedby="inputGroupPrepend" required>
           <div class="invalid-feedback">
-            Please choose a username.
+            Please Enter an Email Address.
           </div>
         </div>
       </div>
@@ -188,7 +188,7 @@
   <section id="pops" class="text-center flex-column justify-content-center align-items-center">
     <div class="inner-pops ">
       <div class="close-x d-flex justify-content-end">
-        <button type="button">
+        <button type="button" id="close-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
@@ -206,10 +206,33 @@
     </div>
   </section>
 
+  
   <footer class="p-4 d-flex flex-column justify-content-center align-items-center">
     <p>Powered By</p>
     <img src="./images/nitda.png" alt="nitda image" class="pb-3">
     <p class="pb-3">Copyright © Digital Nigeria 2022.</p>
   </footer>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
 </body>
 </html>

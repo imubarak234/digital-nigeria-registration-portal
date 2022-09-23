@@ -178,17 +178,17 @@
     <h3 class="pt-3 pb-2">Exhibitor Registration Section</h3>
     <p>I am here to present and showcase what I do.</p>
 
-    <form class="row g-3 needs-validation py-3" novalidate>
+    <form class="row g-3 needs-validation py-3"  id="exibitor-form">
       <div class="col-md-12">
-        <label for="first-name" class="form-label">First Name*</label>
-        <input type="text" class="form-control" id="first-name" required>
+        <label for="first-name" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="first-name" name="first_name" required>
         <div class="invalid-feedback">
           Please Enter First Name
         </div>
       </div>
       <div class="col-md-12">
         <label for="last-name" class="form-label">Last Name</label>
-        <input type="text" class="form-control" id="last-name" required>
+        <input type="text" class="form-control" id="last-name" name="last_name" required>
         <div class="invalid-feedback">
           Please Enter Last Name
         </div>
@@ -197,9 +197,9 @@
         <label for="emailing" class="form-label">Email</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend">@</span>
-          <input type="text" class="form-control" id="emailing" aria-describedby="inputGroupPrepend" required>
+          <input type="email" name="email" class="form-control" id="emailing" aria-describedby="inputGroupPrepend" required>
           <div class="invalid-feedback">
-            Please choose a username.
+            Please Enter an Email Address.
           </div>
         </div>
       </div>
@@ -236,5 +236,27 @@
     <img src="./images/nitda.png" alt="nitda image" class="pb-3">
     <p class="pb-3">Copyright © Digital Nigeria 2022.</p>
   </footer>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    // (function () {
+    //   'use strict'
+
+    //   // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    //   var forms = document.querySelectorAll('.needs-validation')
+
+    //   // Loop over them and prevent submission
+    //   Array.prototype.slice.call(forms)
+    //     .forEach(function (form) {
+    //       form.addEventListener('submit', function (event) {
+    //         if (!form.checkValidity()) {
+    //           event.preventDefault()
+    //           event.stopPropagation()
+    //         }
+
+    //         form.classList.add('was-validated')
+    //       }, false)
+    //     })
+    // })()
+  </script>
 </body>
 </html>
