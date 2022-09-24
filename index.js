@@ -271,6 +271,17 @@ const formEmails = (formId, category) => {
       console.log(body);
 
       emailForm(body.Email);
+
+      const popping = document.getElementById("pops");
+      popping.classList.add('flex');
+      popping.classList.remove('displays');
+
+      const close = document.getElementById('close-button');
+
+      close.addEventListener('click', () => {
+        popping.classList.add('displays');
+        popping.classList.remove('flex');
+      })
     });
   }
 

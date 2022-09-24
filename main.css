@@ -113,6 +113,13 @@ footer p {
   top: 0;
   left: 0;
   backdrop-filter: blur(8px);
+}
+
+.flex{
+  display: flex;
+}
+
+.displays {
   display: none;
 }
 
