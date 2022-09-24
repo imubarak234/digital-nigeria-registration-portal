@@ -132,7 +132,6 @@ footer p {
 }
 
 @media screen and (max-width: 780px) {
-
   #naver .inner-nav .socials-links {
     display: none;
   }
