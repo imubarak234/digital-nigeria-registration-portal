@@ -317,26 +317,39 @@ const formEmails = (formId, category) => {
       body.Date = recentDate;
       
       (async () => {
-        if (await postToSheat()){
-          
+        formId.reset();
+
+        if (await postToSheat(body)){
+          // console.log(body);
+
+          // emailForm(body.Email);
+
+          const popping = document.getElementById("pops");
+          popping.classList.add('flex');
+          popping.classList.remove('displays');
+
+          const close = document.getElementById('close-button');
+
+          close.addEventListener('click', () => {
+            popping.classList.add('displays');
+            popping.classList.remove('flex');
+          })
+        }
+        else {
+          const poppingFalse = document.getElementById("pops-false")
+          poppingFalse.classList.add('flex');
+          poppingFalse.classList.remove('displays');
+
+          const closeFalse = document.getElementById('close-button-false');
+
+          closeFalse.addEventListener('click', () => {
+            poppingFalse.classList.remove('flex');
+            poppingFalse.classList.add('displays');
+          });
         }
       })()
-      console.log("Results of testing the method: " + postToSheat(body))
-      formId.reset();
-      // console.log(body);
-
-      // emailForm(body.Email);
-
-      const popping = document.getElementById("pops");
-      popping.classList.add('flex');
-      popping.classList.remove('displays');
-
-      const close = document.getElementById('close-button');
-
-      close.addEventListener('click', () => {
-        popping.classList.add('displays');
-        popping.classList.remove('flex');
-      })
+      
+      
     });
   }
 

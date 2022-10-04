@@ -136,7 +136,8 @@ footer .footer-socials {
   margin: 100px 0;
 }
 
-#pops {
+#pops,
+#pops-false {
   background-color: rgba(45, 106, 79, 0.6);
   height: 100vh;
   width: 100%;
@@ -155,18 +156,21 @@ footer .footer-socials {
   display: none;
 }
 
-#pops .inner-pops {
+#pops .inner-pops,
+#pops-false .inner-pops {
   background-color: white;
   width: 600px;
   border-radius: 10px;
 }
 
-#pops .inner-pops button {
+#pops .inner-pops button,
+#pops-false .inner-pops button {
   background-color: transparent;
   border: none;
 }
 
-#pops .inner-pops button svg:hover {
+#pops .inner-pops button svg:hover,
+#pops-false .inner-pops button svg:hover {
   fill: green;
 }
 
@@ -189,7 +193,8 @@ footer .footer-socials {
 }
 
 @media screen and (max-width: 615px) {
-  #pops .inner-pops {
+  #pops .inner-pops,
+  #pops-false .inner-pops {
     width: 90%;
   }
 }
