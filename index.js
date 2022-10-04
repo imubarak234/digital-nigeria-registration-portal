@@ -3,77 +3,69 @@ const master = document.getElementById('master-clas-form');
 const participants = document.getElementById('participant-form');
 
 const isEmail = (data, inputEmail) => {
-
   let answer = false;
 
-  for(let x = 0; x < data.length; x++){
-    for( const [key, value] of Object.entries(data[x])){
-  
-      if(key == "Email"){
-        if(inputEmail == value) {
+  for (let x = 0; x < data.length; x++) {
+    for (const [key, value] of Object.entries(data[x])) {
+      if (key == 'Email') {
+        if (inputEmail == value) {
           answer = true;
           break;
         }
-        
       }
     }
-   }
+  }
 
-   return answer;
- }
+  return answer;
+};
 
 const postToSheat = async (info) => {
-
   let answer = true;
 
   await fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
-  .then((res) => (res.json()))
-  .then((data) => {
-
-    if(!isEmail(data, info.Email)){
-      fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(info),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('success: ', data)
-      })
-      .catch((error) => {
-        console.error('Error: ', error);
-      });
-    }
-    else {
-      answer = false;
+    .then((res) => (res.json()))
+    .then((data) => {
+      if (!isEmail(data, info.Email)) {
+        fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(info),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('success: ', data);
+          })
+          .catch((error) => {
+            console.error('Error: ', error);
+          });
+      } else {
+        answer = false;
       // console.log("email already exists");
-    }
+      }
+    });
 
-    
-  });
-  
   return answer;
 };
 
 const getSheat = () => {
   fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
-  .then((res) => (res.json()))
-  .then((data) => console.log(data));
-}
+    .then((res) => (res.json()))
+    .then((data) => console.log(data));
+};
 
 const emailForm = (email) => {
-    Email.send({
-      Host: "smtp.elasticemail.com",
-      Username: "digitalnigeria2022@gmail.com",
-      Port: "2525",
-      Password: "ED930F949049591E09AB981289F0BCD48F52",
-      To: email,
-      From: "digitalnigeria@nitda.gov.ng",
-      Subject: "Digital Nigeria registration",
-      Body: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  Email.send({
+    Host: 'smtp.elasticemail.com',
+    Username: 'digitalnigeria2022@gmail.com',
+    Port: '2525',
+    Password: 'ED930F949049591E09AB981289F0BCD48F52',
+    To: email,
+    From: 'digitalnigeria@nitda.gov.ng',
+    Subject: 'Digital Nigeria registration',
+    Body: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
       <title>
       </title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -291,10 +283,10 @@ const emailForm = (email) => {
       </table>
     </body></html>`,
   })
-      .then(function (message) {
-      console.log("mail sent successfully", message)
-      });
-  }
+    .then((message) => {
+      console.log('mail sent successfully', message);
+    });
+};
 
 const formEmails = (formId, category) => {
   const body = {};
@@ -313,18 +305,18 @@ const formEmails = (formId, category) => {
 
       body.Categories = category;
 
-      let recentDate = new Date();
+      const recentDate = new Date();
       body.Date = recentDate;
-      
+
       (async () => {
         formId.reset();
 
-        if (await postToSheat(body)){
+        if (await postToSheat(body)) {
           // console.log(body);
 
-          // emailForm(body.Email);
+          emailForm(body.Email);
 
-          const popping = document.getElementById("pops");
+          const popping = document.getElementById('pops');
           popping.classList.add('flex');
           popping.classList.remove('displays');
 
@@ -333,10 +325,9 @@ const formEmails = (formId, category) => {
           close.addEventListener('click', () => {
             popping.classList.add('displays');
             popping.classList.remove('flex');
-          })
-        }
-        else {
-          const poppingFalse = document.getElementById("pops-false")
+          });
+        } else {
+          const poppingFalse = document.getElementById('pops-false');
           poppingFalse.classList.add('flex');
           poppingFalse.classList.remove('displays');
 
@@ -347,16 +338,11 @@ const formEmails = (formId, category) => {
             poppingFalse.classList.add('displays');
           });
         }
-      })()
-      
-      
+      })();
     });
   }
-
-  
 };
 
 formEmails(exhibitor, 'Exhibitor');
 formEmails(master, 'Master Class');
 formEmails(participants, 'Participants');
-

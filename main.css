@@ -75,8 +75,8 @@ body {
 #main-section .row .col-md-4 a svg:hover {
   -ms-transform: scale(1.2); /* IE 9 */
   -webkit-transform: scale(1.2); /* Safari 3-8 */
-  transform: scale(1.2); 
-  fill:var(--light_green)
+  transform: scale(1.2);
+  fill: var(--light_green);
 }
 
 /* #main-section .row .col-md-4 a:hover {
@@ -103,12 +103,12 @@ footer .footer-link a {
   color: var(--dark_green);
   border-bottom: 1px solid var(--dark_green);
   font-size: 1.2em;
-  margin: 0.6em 0em;
+  margin: 0.6em 0;
 }
 
 footer .footer-socials {
   display: none;
-  margin: 0.7em 0em;
+  margin: 0.7em 0;
 }
 
 #part-section form {
@@ -148,7 +148,7 @@ footer .footer-socials {
   backdrop-filter: blur(8px);
 }
 
-.flex{
+.flex {
   display: flex;
 }
 
