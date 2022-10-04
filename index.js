@@ -2,21 +2,67 @@ const exhibitor = document.getElementById('exibitor-form');
 const master = document.getElementById('master-clas-form');
 const participants = document.getElementById('participant-form');
 
-const postToSheat = (info) => {
-  fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(info),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log('success: ', data))
-    .catch((error) => {
-      console.error('Error: ', error);
-    });
+const isEmail = (data, inputEmail) => {
+
+  let answer = false;
+
+  for(let x = 0; x < data.length; x++){
+    for( const [key, value] of Object.entries(data[x])){
+  
+      if(key == "Email"){
+        if(inputEmail == value) {
+          answer = true;
+          break;
+        }
+        
+      }
+    }
+   }
+
+   return answer;
+ }
+
+const postToSheat = async (info) => {
+
+  let answer = true;
+
+  await fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
+  .then((res) => (res.json()))
+  .then((data) => {
+
+    if(!isEmail(data, info.Email)){
+      fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(info),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('success: ', data)
+      })
+      .catch((error) => {
+        console.error('Error: ', error);
+      });
+    }
+    else {
+      answer = false;
+      // console.log("email already exists");
+    }
+
+    
+  });
+  
+  return answer;
 };
+
+const getSheat = () => {
+  fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
+  .then((res) => (res.json()))
+  .then((data) => console.log(data));
+}
 
 const emailForm = (email) => {
     Email.send({
@@ -25,7 +71,7 @@ const emailForm = (email) => {
       Port: "2525",
       Password: "ED930F949049591E09AB981289F0BCD48F52",
       To: email,
-      From: "digitalnigeria2022@gmail.com",
+      From: "digitalnigeria@nitda.gov.ng",
       Subject: "Digital Nigeria registration",
       Body: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
       <title>
@@ -70,7 +116,7 @@ const emailForm = (email) => {
       </style>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
       <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.0/spectrum.min.css">
-      </head><body style="padding: 0px; margin: 0px; background: url(&quot;https://api.smtprelay.co/userfile/0d0b99ac-bce0-488d-8237-ac5e2e4f9c73/Digital_Nigeria_Banner_2022_mub_1.jpg&quot;);" data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1022.0">
+    </head><body style="padding: 0px; margin: 0px; background: url(&quot;https://api.smtprelay.co/userfile/0d0b99ac-bce0-488d-8237-ac5e2e4f9c73/Digital_Nigeria_Banner_2022_mub_1.jpg&quot;);" data-new-gr-c-s-check-loaded="14.1022.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1022.0">
       <table style="height: 100%; width: 100%;" align="center">
         <tbody>
           <tr>
@@ -176,7 +222,7 @@ const emailForm = (email) => {
                           <tbody>
                             <tr>
                               <td valign="top" class="edtext" style="padding: 20px; text-align: left; color: #5f5f5f; font-size: 14px; font-family: Helvetica, Arial, sans-serif; word-break: break-word; direction: ltr; box-sizing: border-box;">
-                                <p style="margin: 0px; padding: 0px;">Have a question? Contact us: digitalnigeria2022@gmail.com</p>
+                                <p class="text-center" style="text-align: center; margin: 0px; padding: 0px;">Have a question? Contact us: digitalnigeria@nitda.gov.ng</p>
                               </td>
                             </tr>
                           </tbody>
@@ -243,7 +289,7 @@ const emailForm = (email) => {
           </tr>
         </tbody>
       </table>
-      </body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>`,
+    </body></html>`,
   })
       .then(function (message) {
       console.log("mail sent successfully", message)
@@ -252,6 +298,7 @@ const emailForm = (email) => {
 
 const formEmails = (formId, category) => {
   const body = {};
+
   if (formId != null) {
     formId.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -266,11 +313,19 @@ const formEmails = (formId, category) => {
 
       body.Categories = category;
 
-      postToSheat(body);
+      let recentDate = new Date();
+      body.Date = recentDate;
+      
+      (async () => {
+        if (await postToSheat()){
+          
+        }
+      })()
+      console.log("Results of testing the method: " + postToSheat(body))
       formId.reset();
-      console.log(body);
+      // console.log(body);
 
-      emailForm(body.Email);
+      // emailForm(body.Email);
 
       const popping = document.getElementById("pops");
       popping.classList.add('flex');
