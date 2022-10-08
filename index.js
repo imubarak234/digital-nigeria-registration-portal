@@ -62,7 +62,7 @@ const emailForm = (email) => {
     Username: 'digitalnigeria2022@gmail.com',
     Port: '2525',
     Password: 'ED930F949049591E09AB981289F0BCD48F52',
-    To: email,
+    To: email.trim(),
     From: 'digitalnigeria@nitda.gov.ng',
     Subject: 'Digital Nigeria registration',
     Body: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
@@ -311,8 +311,15 @@ const formEmails = (formId, category) => {
       (async () => {
         formId.reset();
 
+        const waiting = document.getElementById('pops-wait');
+        waiting.classList.add('flex');
+        waiting.classList.remove('displays');
+
         if (await postToSheat(body)) {
           // console.log(body);
+         
+          waiting.classList.remove('flex');
+          waiting.classList.add('displays');
 
           emailForm(body.Email);
 
@@ -327,6 +334,10 @@ const formEmails = (formId, category) => {
             popping.classList.remove('flex');
           });
         } else {
+
+          waiting.classList.remove('flex');
+          waiting.classList.add('displays');
+
           const poppingFalse = document.getElementById('pops-false');
           poppingFalse.classList.add('flex');
           poppingFalse.classList.remove('displays');
