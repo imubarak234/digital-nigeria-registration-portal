@@ -19,33 +19,62 @@ const isEmail = (data, inputEmail) => {
   return answer;
 };
 
+const postParticipants = async (info) => {
+  let answer = true;
+
+  await fetch('https://sheet.best/api/sheets/7d520258-c5f2-4cc6-8644-436ff5e3e6c5')
+  .then((res) => (res.json()))
+  .then((data) => {
+    if ( !isEmail(data, info.Email) ) {
+      fetch('https://sheet.best/api/sheets/7d520258-c5f2-4cc6-8644-436ff5e3e6c5', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(info),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('success: ', data);
+        })
+        .catch((error) => {
+          console.error('Error: ', error);
+        });
+    }
+    else {
+      answer = false;
+    }
+  });
+} 
+
 const postToSheat = async (info) => {
   let answer = true;
 
   await fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
-    .then((res) => (res.json()))
-    .then((data) => {
-      if (!isEmail(data, info.Email)) {
-        fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(info),
+  .then((res) => (res.json()))
+  .then((data) => {
+    if ( !isEmail(data, info.Email) ) {
+      fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(info),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('success: ', data);
         })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('success: ', data);
-          })
-          .catch((error) => {
-            console.error('Error: ', error);
-          });
-      } else {
-        answer = false;
-      // console.log("email already exists");
-      }
-    });
+        .catch((error) => {
+          console.error('Error: ', error);
+        });
+    }
+    else {
+      answer = false;
+    }
+  });
 
   return answer;
 };
@@ -293,6 +322,7 @@ const formEmails = (formId, category) => {
 
   if (formId != null) {
     formId.addEventListener('submit', (e) => {
+
       e.preventDefault();
       const info = e.target;
       const forms = info.querySelectorAll('.col-md-12');
@@ -315,40 +345,76 @@ const formEmails = (formId, category) => {
         waiting.classList.add('flex');
         waiting.classList.remove('displays');
 
-        if (await postToSheat(body)) {
-          // console.log(body);
-         
-          waiting.classList.remove('flex');
-          waiting.classList.add('displays');
-
-          emailForm(body.Email);
-
-          const popping = document.getElementById('pops');
-          popping.classList.add('flex');
-          popping.classList.remove('displays');
-
-          const close = document.getElementById('close-button');
-
-          close.addEventListener('click', () => {
-            popping.classList.add('displays');
-            popping.classList.remove('flex');
-          });
-        } else {
-
-          waiting.classList.remove('flex');
-          waiting.classList.add('displays');
-
-          const poppingFalse = document.getElementById('pops-false');
-          poppingFalse.classList.add('flex');
-          poppingFalse.classList.remove('displays');
-
-          const closeFalse = document.getElementById('close-button-false');
-
-          closeFalse.addEventListener('click', () => {
-            poppingFalse.classList.remove('flex');
-            poppingFalse.classList.add('displays');
-          });
+        if(body.Categories != 'Participants'){
+          if (await postToSheat(body)) {
+           
+            waiting.classList.remove('flex');
+            waiting.classList.add('displays');
+  
+            emailForm(body.Email);
+  
+            const popping = document.getElementById('pops');
+            popping.classList.add('flex');
+            popping.classList.remove('displays');
+  
+            const close = document.getElementById('close-button');
+  
+            close.addEventListener('click', () => {
+              popping.classList.add('displays');
+              popping.classList.remove('flex');
+            });
+          } else {
+            waiting.classList.remove('flex');
+            waiting.classList.add('displays');
+  
+            const poppingFalse = document.getElementById('pops-false');
+            poppingFalse.classList.add('flex');
+            poppingFalse.classList.remove('displays');
+  
+            const closeFalse = document.getElementById('close-button-false');
+  
+            closeFalse.addEventListener('click', () => {
+              poppingFalse.classList.remove('flex');
+              poppingFalse.classList.add('displays');
+            });
+          }
         }
+        else{
+          if (await postParticipants(body)) {
+           
+            waiting.classList.remove('flex');
+            waiting.classList.add('displays');
+  
+            emailForm(body.Email);
+  
+            const popping = document.getElementById('pops');
+            popping.classList.add('flex');
+            popping.classList.remove('displays');
+  
+            const close = document.getElementById('close-button');
+  
+            close.addEventListener('click', () => {
+              popping.classList.add('displays');
+              popping.classList.remove('flex');
+            });
+          } else {
+            waiting.classList.remove('flex');
+            waiting.classList.add('displays');
+  
+            const poppingFalse = document.getElementById('pops-false');
+            poppingFalse.classList.add('flex');
+            poppingFalse.classList.remove('displays');
+  
+            const closeFalse = document.getElementById('close-button-false');
+  
+            closeFalse.addEventListener('click', () => {
+              poppingFalse.classList.remove('flex');
+              poppingFalse.classList.add('displays');
+            });
+          }
+        }
+
+        
       })();
     });
   }
