@@ -22,7 +22,7 @@ const isEmail = (data, inputEmail) => {
 const postParticipants = async (info) => {
   let answer = true;
 
-  await fetch('https://sheet.best/api/sheets/7d520258-c5f2-4cc6-8644-436ff5e3e6c5')
+  await fetch('')
   .then((res) => (res.json()))
   .then((data) => {
     if ( !isEmail(data, info.Email) ) {
