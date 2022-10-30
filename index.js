@@ -82,7 +82,7 @@ const postToSheat = async (info) => {
 };
 
 const getSheat = () => {
-  fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
+  fetch('')
     .then((res) => (res.json()))
     .then((data) => console.log(data));
 };
