@@ -26,7 +26,7 @@ const postParticipants = async (info) => {
   .then((res) => (res.json()))
   .then((data) => {
     if ( !isEmail(data, info.Email) ) {
-      fetch('https://sheet.best/api/sheets/7d520258-c5f2-4cc6-8644-436ff5e3e6c5', {
+      fetch('', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -53,11 +53,11 @@ const postParticipants = async (info) => {
 const postToSheat = async (info) => {
   let answer = true;
 
-  await fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67')
+  await fetch('')
   .then((res) => (res.json()))
   .then((data) => {
     if ( !isEmail(data, info.Email) ) {
-      fetch('https://sheet.best/api/sheets/5f05d562-cf94-492b-aac8-195d3c57ec67', {
+      fetch('', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -111,7 +111,7 @@ const templateId = (args) => {
 
 const emailForm = async (email, name, category) => {
 
-  await fetch('https://digitalnigeria.herokuapp.com/api/v1/emails', {
+  await fetch('', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
